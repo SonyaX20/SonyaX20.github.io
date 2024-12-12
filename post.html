@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post - Sonya's Blog</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/post.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-brand"><a href="index.html">Sonya's Blog</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#posts">Posts</a></li>
+                <li><a href="index.html#about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="post-container">
+        <article id="post-content" class="markdown-body">
+            <!-- Markdown content will be loaded here -->
+        </article>
+        
+        <div class="post-footer">
+            <div class="post-meta">
+                <span class="post-date" id="post-date"></span>
+                <span class="post-tags" id="post-tags"></span>
+            </div>
+            <div class="share-buttons">
+                <button onclick="share('twitter')">
+                    <i class="fab fa-twitter"></i> Share on Twitter
+                </button>
+                <button onclick="share('linkedin')">
+                    <i class="fab fa-linkedin"></i> Share on LinkedIn
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Sonya's Blog. All rights reserved.</p>
+        <div class="social-links">
+            <a href="https://github.com/SonyaX20" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+    </footer>
+
+    <script src="assets/js/post.js"></script>
+</body>
+</html> 
