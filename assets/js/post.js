@@ -1,9 +1,8 @@
 async function loadPost() {
     const urlParams = new URLSearchParams(window.location.search);
-    let postPath = urlParams.get('post');
+    const postPath = urlParams.get('post');
     
     if (!postPath) {
-        console.error('No post path provided');
         document.getElementById('post-content').innerHTML = `
             <h1>Error</h1>
             <p>No post specified.</p>
@@ -13,27 +12,17 @@ async function loadPost() {
     }
 
     try {
-        console.log('Raw post path:', postPath);
-        
-        postPath = decodeURIComponent(postPath);
-        console.log('Decoded post path:', postPath);
-        
-        if (!postPath.startsWith('posts/')) {
-            postPath = 'posts/' + postPath.replace(/^\/+/, '');
-        }
-        console.log('Final post path:', postPath);
-        
         const response = await fetch(postPath);
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}, path: ${postPath}`);
+            throw new Error(`Failed to load post (${response.status})`);
         }
         
         const markdown = await response.text();
-        console.log('Markdown loaded successfully, length:', markdown.length);
         
-        // Parse YAML frontmatter
+        // Parse frontmatter and content
         let content = markdown;
         let frontmatter = {};
+        
         if (markdown.startsWith('---')) {
             const endIndex = markdown.indexOf('---', 3);
             if (endIndex !== -1) {
@@ -48,7 +37,7 @@ async function loadPost() {
             }
         }
         
-        // Configure marked options
+        // Configure marked
         marked.setOptions({
             highlight: function(code, lang) {
                 if (lang && hljs.getLanguage(lang)) {
@@ -60,27 +49,16 @@ async function loadPost() {
             gfm: true
         });
 
-        // Render markdown content
+        // Render content
         const renderedContent = marked.parse(content);
-        
-        // Update page metadata
         document.title = frontmatter.title || 'Blog Post';
         
-        // Create post header with metadata
+        // Create header
         const headerHtml = `
             <header class="post-header">
                 <h1>${frontmatter.title || ''}</h1>
                 <div class="post-meta">
                     <span class="post-date">${frontmatter.date || ''}</span>
-                    ${frontmatter.categories ? 
-                        `<div class="post-categories">
-                            ${frontmatter.categories
-                                .replace(/[\[\]]/g, '')  // Remove brackets
-                                .split(',')              // Split into array
-                                .map(cat => cat.trim())  // Trim whitespace
-                                .join(', ')}             
-                        </div>` : ''
-                    }
                     ${frontmatter.tags ? 
                         `<div class="post-tags">
                             ${frontmatter.tags
@@ -94,49 +72,21 @@ async function loadPost() {
             </header>
         `;
 
-        // Update content
-        const postContent = document.getElementById('post-content');
-        postContent.innerHTML = headerHtml + renderedContent;
+        // Update page
+        document.getElementById('post-content').innerHTML = headerHtml + renderedContent;
         
         // Initialize syntax highlighting
-        document.querySelectorAll('pre code').forEach((block) => {
-            hljs.highlightBlock(block);
-        });
+        document.querySelectorAll('pre code').forEach(block => hljs.highlightBlock(block));
 
     } catch (error) {
-        console.error('Error details:', {
-            message: error.message,
-            path: postPath,
-            url: window.location.href,
-            error: error
-        });
-        
         document.getElementById('post-content').innerHTML = `
             <h1>Error loading post</h1>
             <p>The post could not be loaded.</p>
             <p>Error details: ${error.message}</p>
-            <p>Path attempted: ${postPath}</p>
             <p><a href="index.html">Return to home</a></p>
         `;
     }
 }
 
-function share(platform) {
-    const url = window.location.href;
-    const title = document.title;
-    
-    let shareUrl;
-    switch(platform) {
-        case 'twitter':
-            shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
-            break;
-        case 'linkedin':
-            shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
-            break;
-    }
-    
-    window.open(shareUrl, '_blank', 'width=600,height=400');
-}
-
-// 只保留初始加载
+// Load post when page loads
 document.addEventListener('DOMContentLoaded', loadPost); 
