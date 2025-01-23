@@ -1,6 +1,6 @@
 async function loadPost() {
-    // 使用 hash 而不是查询参数
-    const postPath = window.location.hash.slice(1); // 移除开头的 #
+    // 使用 hash 而不是查询参数，移除开头的 #/ 
+    const postPath = window.location.hash.slice(2); // 移除 #/
     
     if (!postPath) {
         console.error('No post path provided');
@@ -92,6 +92,7 @@ async function loadPost() {
 
     } catch (error) {
         console.error('Detailed error loading post:', error);
+        console.error('Attempted path:', postPath);
         document.getElementById('post-content').innerHTML = `
             <h1>Error loading post</h1>
             <p>The post could not be loaded.</p>
@@ -117,8 +118,14 @@ function share(platform) {
     window.open(shareUrl, '_blank', 'width=600,height=400');
 }
 
-// 添加 hash 变化监听器，以便支持浏览器的前进/后退按钮
+// 添加 hash 变化监听器
 window.addEventListener('hashchange', loadPost);
 
 // 初始加载
-document.addEventListener('DOMContentLoaded', loadPost); 
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.location.hash) {
+        loadPost();
+    } else {
+        window.location.href = 'index.html';
+    }
+}); 
