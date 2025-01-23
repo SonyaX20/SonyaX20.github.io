@@ -47,7 +47,7 @@ const posts = [
         date: '2024-03-21',
         summary: 'An in-depth exploration of Roboflow Universe, a powerful platform for computer vision tasks including dataset management, model training, and deployment.',
         image: 'assets/images/posts/pc.png',
-        url: 'posts/roboflow-intro.html'
+        url: 'posts/roboflow-intro.md'
     },
 ];
 
