@@ -103,11 +103,30 @@ Roboflow seamlessly integrates with popular tools:
 
 ## Pricing Structure
 
-| Tier       | Features                                        |
-|:-----------|:-----------------------------------------------|
-| Free       | Public datasets, basic features                 |
-| Pro        | Private datasets, advanced features, API access |
-| Enterprise | Custom solutions, dedicated support             |
+<div class="pricing-table">
+<table>
+    <thead>
+        <tr>
+            <th>Tier</th>
+            <th>Features</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Free</td>
+            <td>Public datasets, basic features</td>
+        </tr>
+        <tr>
+            <td>Pro</td>
+            <td>Private datasets, advanced features, API access</td>
+        </tr>
+        <tr>
+            <td>Enterprise</td>
+            <td>Custom solutions, dedicated support</td>
+        </tr>
+    </tbody>
+</table>
+</div>
 
 ## Conclusion
 
