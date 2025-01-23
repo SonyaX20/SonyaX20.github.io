@@ -3,34 +3,39 @@ async function loadPost() {
     const postPath = urlParams.get('post');
     
     if (!postPath) {
-        console.error('No post path provided');
-        document.getElementById('post-content').innerHTML = `
-            <h1>Error</h1>
-            <p>No post specified.</p>
-            <p><a href="index.html">Return to home</a></p>
-        `;
+        console.error('Error: No post path provided in URL');
+        console.log('Current URL:', window.location.href);
+        console.log('Search params:', window.location.search);
         return;
     }
 
-    console.log('Loading post:', postPath);
+    console.log('Attempting to load post:', postPath);
     console.log('Full URL:', window.location.href);
     console.log('Base URL:', document.baseURI);
 
     const response = await fetch(postPath);
-    console.log('Response:', response);
+    console.log('Fetch response:', {
+        ok: response.ok,
+        status: response.status,
+        statusText: response.statusText,
+        type: response.type,
+        url: response.url
+    });
 
     if (!response.ok) {
-        console.error('Failed to load post:', response.status, response.statusText);
-        document.getElementById('post-content').innerHTML = `
-            <h1>Error loading post</h1>
-            <p>Status: ${response.status}</p>
-            <p><a href="index.html">Return to home</a></p>
-        `;
+        console.error('Failed to load post:', {
+            status: response.status,
+            statusText: response.statusText,
+            path: postPath
+        });
         return;
     }
 
     const markdown = await response.text();
-    console.log('Markdown loaded, length:', markdown.length);
+    console.log('Markdown loaded successfully', {
+        length: markdown.length,
+        preview: markdown.substring(0, 100)
+    });
 
     // Parse frontmatter
     let content = markdown;
@@ -47,12 +52,11 @@ async function loadPost() {
                 }
             });
             content = markdown.slice(endIndex + 3).trim();
+            console.log('Frontmatter parsed:', frontmatter);
         }
     }
 
-    console.log('Frontmatter:', frontmatter);
-
-    // Render content
+    // Configure marked
     marked.setOptions({
         highlight: function(code, lang) {
             if (lang && hljs.getLanguage(lang)) {
@@ -64,8 +68,9 @@ async function loadPost() {
         gfm: true
     });
 
+    // Render content
     const renderedContent = marked.parse(content);
-    console.log('Content rendered');
+    console.log('Content rendered successfully');
 
     // Update page
     document.getElementById('post-content').innerHTML = `
@@ -91,6 +96,14 @@ async function loadPost() {
 
     // Initialize syntax highlighting
     document.querySelectorAll('pre code').forEach(block => hljs.highlightBlock(block));
+    console.log('Syntax highlighting initialized');
 }
 
-document.addEventListener('DOMContentLoaded', loadPost); 
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('Page loaded, starting post load process');
+    loadPost().catch(error => {
+        console.error('Error in loadPost:', error);
+        console.log('Stack:', error.stack);
+        console.log('Error occurred at:', new Date().toISOString());
+    });
+}); 
