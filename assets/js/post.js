@@ -13,14 +13,23 @@ async function loadPost() {
     }
 
     try {
-        console.log('Loading post:', postPath);
+        console.log('Raw post path:', postPath);
+        
+        postPath = decodeURIComponent(postPath);
+        console.log('Decoded post path:', postPath);
+        
+        if (!postPath.startsWith('posts/')) {
+            postPath = 'posts/' + postPath.replace(/^\/+/, '');
+        }
+        console.log('Final post path:', postPath);
+        
         const response = await fetch(postPath);
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`HTTP error! status: ${response.status}, path: ${postPath}`);
         }
         
         const markdown = await response.text();
-        console.log('Markdown content loaded:', markdown.substring(0, 100) + '...');
+        console.log('Markdown loaded successfully, length:', markdown.length);
         
         // Parse YAML frontmatter
         let content = markdown;
@@ -95,11 +104,18 @@ async function loadPost() {
         });
 
     } catch (error) {
-        console.error('Error loading post:', error);
+        console.error('Error details:', {
+            message: error.message,
+            path: postPath,
+            url: window.location.href,
+            error: error
+        });
+        
         document.getElementById('post-content').innerHTML = `
             <h1>Error loading post</h1>
             <p>The post could not be loaded.</p>
             <p>Error details: ${error.message}</p>
+            <p>Path attempted: ${postPath}</p>
             <p><a href="index.html">Return to home</a></p>
         `;
     }
