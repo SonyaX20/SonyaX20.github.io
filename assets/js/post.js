@@ -10,8 +10,12 @@ async function loadPost() {
     }
 
     try {
-        console.log('Attempting to load post:', postPath);
-        const response = await fetch(postPath);
+        // Add base URL for GitHub Pages
+        const baseUrl = 'https://sonyax20.github.io';
+        const fullPath = postPath.startsWith('/') ? baseUrl + postPath : baseUrl + '/' + postPath;
+        
+        console.log('Attempting to load post:', fullPath);
+        const response = await fetch(fullPath);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
