@@ -4,16 +4,19 @@ async function loadPost() {
     const postPath = urlParams.get('post');
     
     if (!postPath) {
+        console.error('No post path provided');
         window.location.href = 'index.html';
         return;
     }
 
     try {
+        console.log('Attempting to load post:', postPath);
         const response = await fetch(postPath);
         if (!response.ok) {
-            throw new Error('Failed to load post');
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
         const markdown = await response.text();
+        console.log('Markdown content loaded:', markdown.substring(0, 100) + '...'); // Log first 100 chars
         
         // Parse YAML frontmatter
         let content = markdown;
@@ -88,8 +91,13 @@ async function loadPost() {
         });
 
     } catch (error) {
-        console.error('Error loading post:', error);
-        document.getElementById('post-content').innerHTML = '<h1>Error loading post</h1><p>The post could not be loaded.</p>';
+        console.error('Detailed error loading post:', error);
+        console.error('Post path was:', postPath);
+        document.getElementById('post-content').innerHTML = `
+            <h1>Error loading post</h1>
+            <p>The post could not be loaded.</p>
+            <p>Error details: ${error.message}</p>
+        `;
     }
 }
 
