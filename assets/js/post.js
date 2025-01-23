@@ -1,7 +1,6 @@
 async function loadPost() {
-    // Get post URL from query parameter
     const urlParams = new URLSearchParams(window.location.search);
-    const postPath = urlParams.get('post');
+    let postPath = urlParams.get('post');
     
     if (!postPath) {
         console.error('No post path provided');
@@ -10,11 +9,13 @@ async function loadPost() {
     }
 
     try {
-        // 解码 URL 并移除前导斜杠
-        const cleanPath = decodeURIComponent(postPath).replace(/^\//, '');
-        console.log('Attempting to load post:', cleanPath);
+        // 处理 URL 编码
+        postPath = postPath.replace(/%2F/gi, '/');  // 直接替换 %2F 为 /
+        postPath = postPath.replace(/^\/+/, '');    // 移除开头的斜杠
         
-        const response = await fetch(cleanPath);
+        console.log('Processing post path:', postPath);
+        
+        const response = await fetch(postPath);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
