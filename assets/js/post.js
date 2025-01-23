@@ -34,17 +34,20 @@ async function loadPost() {
     }
 
     try {
-        // 1. 尝试加载文件
+        // 构建 GitHub raw content URL
+        const rawGitHubUrl = `https://raw.githubusercontent.com/SonyaX20/SonyaX20.github.io/main/${postPath}`;
+        
         showError(
             'Status Update',
             'Attempting to fetch post file...',
             {
-                'Post Path': postPath,
-                'Full URL': window.location.href
+                'Original Path': postPath,
+                'Raw GitHub URL': rawGitHubUrl,
+                'Full Page URL': window.location.href
             }
         );
 
-        const response = await fetch(postPath);
+        const response = await fetch(rawGitHubUrl);
         if (!response.ok) {
             throw new Error(`HTTP ${response.status} - ${response.statusText}`);
         }
@@ -193,7 +196,8 @@ async function loadPost() {
             {
                 'Error Type': error.name,
                 'Error Stack': error.stack,
-                'Post Path': postPath,
+                'Original Path': postPath,
+                'Raw GitHub URL': `https://raw.githubusercontent.com/SonyaX20/SonyaX20.github.io/main/${postPath}`,
                 'Full URL': window.location.href,
                 'Browser Info': navigator.userAgent
             }
