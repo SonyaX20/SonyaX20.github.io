@@ -1,4 +1,9 @@
-# Web Development Fundamentals
+---
+title: Web Development Fundamentals
+date: 2024-03-22
+categories: [Web Development, Programming]
+tags: [html, css, javascript, web-dev]
+---
 
 <img src="../assets/images/posts/web-dev.png" class="post-image" alt="Web Development">
 

@@ -1,4 +1,9 @@
-# Welcome to My Blog
+---
+title: Welcome to My Blog
+date: 2024-03-20
+categories: [Personal, Announcements]
+tags: [welcome, blog, introduction]
+---
 
 <img src="../assets/images/welcome.png" class="post-image" alt="Welcome">
 

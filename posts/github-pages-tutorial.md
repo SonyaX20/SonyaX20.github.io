@@ -1,6 +1,13 @@
-# How to Build a Blog with GitHub Pages
+---
+title: How to Build a Blog with GitHub Pages
+date: 2024-03-21
+categories: [Web Development, Tutorial]
+tags: [github-pages, static-site, web-development, blogging]
+---
 
-<img src="../assets/images/posts/github-pages.png" class="post-image" alt="GitHub Pages">
+<!-- # How to Build a Blog with GitHub Pages
+
+<img src="../assets/images/posts/github-pages.png" class="post-image" alt="GitHub Pages"> -->
 
 ## Introduction
 

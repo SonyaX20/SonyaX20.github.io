@@ -1,4 +1,9 @@
-# Essential Cybersecurity Concepts
+---
+title: Essential Cybersecurity Concepts
+date: 2024-03-25
+categories: [Security, Technology]
+tags: [cybersecurity, network-security, security-best-practices, infosec]
+---
 
 <img src="../assets/images/posts/security.png" class="post-image" alt="Cybersecurity">
 

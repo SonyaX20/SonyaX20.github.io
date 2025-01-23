@@ -116,7 +116,7 @@
 
 .post-image {
     max-width: 20px;  /* 使用固定的小尺寸 */
-    width: 1%;      /* 非常小的百分比 */
+    width: 0.5%;      /* 非常小的百分比 */
     height: auto;
     display: block;
     margin: 2rem auto;
@@ -129,4 +129,31 @@
         max-width: 15px;  /* 移动设备上稍微小一点 */
         width: 0.5%;
     }
+} 
+
+/* Add table styles */
+.markdown-body table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.markdown-body th,
+.markdown-body td {
+    border: 1px solid #2c3e50;  /* Dark visible border */
+    padding: 8px 12px;
+    text-align: left;
+}
+
+.markdown-body th {
+    background-color: #f6f8fa;
+    font-weight: 600;
+}
+
+.markdown-body tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.markdown-body tr:hover {
+    background-color: #f0f2f4;
 } 

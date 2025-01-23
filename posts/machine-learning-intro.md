@@ -1,4 +1,9 @@
-# Introduction to Machine Learning
+---
+title: Introduction to Machine Learning
+date: 2024-03-23
+categories: [Machine Learning, Technology]
+tags: [ml, ai, data-science, algorithms]
+---
 
 <img src="../assets/images/posts/ml.png" class="post-image" alt="Machine Learning">
 
