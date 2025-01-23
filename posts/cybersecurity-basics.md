@@ -5,8 +5,6 @@ categories: [Security, Technology]
 tags: [cybersecurity, network-security, security-best-practices, infosec]
 ---
 
-<img src="../assets/images/posts/security.png" class="post-image" alt="Cybersecurity">
-
 ## Introduction
 
 Understanding basic cybersecurity principles is crucial in today's digital world.

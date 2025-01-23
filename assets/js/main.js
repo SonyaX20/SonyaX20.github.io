@@ -4,64 +4,64 @@ const posts = [
         title: 'A Comprehensive Guide to Roboflow Universe',
         date: '2024-03-21',
         summary: 'An in-depth exploration of Roboflow Universe, a powerful platform for computer vision tasks including dataset management, model training, and deployment.',
-        image: '/assets/images/posts/pc.png',
-        url: '/posts/roboflow-intro.md'
+        image: 'assets/images/posts/pc.png',
+        url: 'posts/roboflow-intro.md'
     },
     {
         title: 'Welcome to My Blog',
         date: '2024-03-20',
         summary: 'This is my first blog post, introducing how this website was built...',
-        image: '/assets/images/posts/image.png',
-        url: '/posts/welcome.md'
+        image: 'assets/images/posts/image.png',
+        url: 'posts/welcome.md'
     },
     {
         title: 'How to Build a Blog with GitHub Pages',
         date: '2024-03-21',
         summary: 'A step-by-step guide to creating your own blog using GitHub Pages...',
-        image: '/assets/images/posts/pc.png',
-        url: '/posts/github-pages-tutorial.md'
+        image: 'assets/images/posts/pc.png',
+        url: 'posts/github-pages-tutorial.md'
     },
     {
         title: 'Web Development Fundamentals',
         date: '2024-03-22',
         summary: 'Learn about the core concepts and best practices in modern web development...',
-        image: '/assets/images/posts/pc.png',
-        url: '/posts/web-development-basics.md'
+        image: 'assets/images/posts/pc.png',
+        url: 'posts/web-development-basics.md'
     },
     {
         title: 'Introduction to Machine Learning',
         date: '2024-03-23',
         summary: 'A beginner-friendly guide to understanding machine learning concepts...',
-        image: '/assets/images/posts/pc.png',
-        url: '/posts/machine-learning-intro.md'
+        image: 'assets/images/posts/pc.png',
+        url: 'posts/machine-learning-intro.md'
     },
     {
         title: 'Coding Best Practices and Clean Code',
         date: '2024-03-24',
         summary: 'Essential principles for writing clean, maintainable code...',
-        image: '/assets/images/posts/pc.png',
-        url: '/posts/coding-best-practices.md'
+        image: 'assets/images/posts/pc.png',
+        url: 'posts/coding-best-practices.md'
     },
     {
         title: 'Essential Cybersecurity Concepts',
         date: '2024-03-25',
         summary: 'Understanding fundamental cybersecurity principles and best practices...',
-        image: '/assets/images/posts/pc.png',
-        url: '/posts/cybersecurity-basics.md'
+        image: 'assets/images/posts/pc.png',
+        url: 'posts/cybersecurity-basics.md'
     },
     {
         title: 'Remote Sensing Image Analysis with Python',
         date: '2024-03-26',
         summary: 'Analyzing Sentinel-2 satellite imagery of Wismar area using Python, including image classification and edge detection...',
-        image: '/assets/images/posts/globe.png',
-        url: '/posts/remote-sensing-analysis.md'
+        image: 'assets/images/posts/globe.png',
+        url: 'posts/remote-sensing-analysis.md'
     },
     {
         title: 'Explore Google CoLab',
         date: '2024-03-28',
         summary: 'Understanding why Google CoLab is essential for deep learning projects, especially for hardware compatibility and GPU acceleration...',
-        image: '/assets/images/posts/pc.png',
-        url: '/posts/explore-google-colab.md'
+        image: 'assets/images/posts/pc.png',
+        url: 'posts/explore-google-colab.md'
     }
 ];
 

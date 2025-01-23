@@ -5,7 +5,6 @@ categories: [Programming, Best Practices]
 tags: [clean-code, software-development, coding-standards, SOLID]
 ---
 
-<img src="../assets/images/posts/clean-code.png" class="post-image" alt="Clean Code">
 
 ## Introduction
 
