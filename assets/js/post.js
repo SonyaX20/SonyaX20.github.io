@@ -1,10 +1,9 @@
 async function loadPost() {
-    // 使用 hash 而不是查询参数，移除开头的 #/
-    const postPath = window.location.hash.slice(2); // 移除 #/
+    const urlParams = new URLSearchParams(window.location.search);
+    let postPath = urlParams.get('post');
     
     if (!postPath) {
         console.error('No post path provided');
-        // 不要立即重定向，而是显示错误信息
         document.getElementById('post-content').innerHTML = `
             <h1>Error</h1>
             <p>No post specified.</p>
@@ -14,11 +13,7 @@ async function loadPost() {
     }
 
     try {
-        console.log('Attempting to load post:', postPath);
-        // 添加更多日志来调试
-        console.log('Current URL:', window.location.href);
-        console.log('Hash:', window.location.hash);
-        
+        console.log('Loading post:', postPath);
         const response = await fetch(postPath);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -100,14 +95,11 @@ async function loadPost() {
         });
 
     } catch (error) {
-        console.error('Detailed error loading post:', error);
-        console.error('Attempted path:', postPath);
-        console.error('Full URL:', window.location.href);
+        console.error('Error loading post:', error);
         document.getElementById('post-content').innerHTML = `
             <h1>Error loading post</h1>
             <p>The post could not be loaded.</p>
             <p>Error details: ${error.message}</p>
-            <p>Attempted path: ${postPath}</p>
             <p><a href="index.html">Return to home</a></p>
         `;
     }
@@ -130,19 +122,5 @@ function share(platform) {
     window.open(shareUrl, '_blank', 'width=600,height=400');
 }
 
-// 添加 hash 变化监听器
-window.addEventListener('hashchange', loadPost);
-
-// 初始加载
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('Page loaded. Hash:', window.location.hash);
-    if (window.location.hash) {
-        loadPost();
-    } else {
-        console.log('No hash found in URL');
-        document.getElementById('post-content').innerHTML = `
-            <h1>No post selected</h1>
-            <p><a href="index.html">Return to home</a></p>
-        `;
-    }
-}); 
+// 只保留初始加载
+document.addEventListener('DOMContentLoaded', loadPost); 
