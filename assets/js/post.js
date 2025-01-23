@@ -2,30 +2,77 @@ async function loadPost() {
     const urlParams = new URLSearchParams(window.location.search);
     const postPath = urlParams.get('post');
     
-    if (!postPath) {
+    function showError(title, message, details = {}) {
+        const detailsHtml = Object.entries(details)
+            .map(([key, value]) => `<p><strong>${key}:</strong> ${value}</p>`)
+            .join('');
+
         document.getElementById('post-content').innerHTML = `
-            <h1>Error</h1>
-            <p>No post path was provided in the URL.</p>
-            <p>Details: Missing 'post' parameter in URL</p>
-            <p><a href="index.html">Return to home</a></p>
+            <div style="padding: 20px; font-family: monospace; white-space: pre-wrap;">
+                <h2 style="color: red;">${title}</h2>
+                <p>${message}</p>
+                <div style="background: #f8f9fa; padding: 10px; margin: 10px 0; border-left: 4px solid red;">
+                    ${detailsHtml}
+                </div>
+                <hr>
+                <a href="index.html">Return to Home</a>
+            </div>
         `;
+    }
+
+    if (!postPath) {
+        showError(
+            'URL Parameter Error',
+            'No post path provided in URL',
+            {
+                'Current URL': window.location.href,
+                'Search Params': window.location.search,
+                'Expected Format': 'post.html?post=posts/example.md'
+            }
+        );
         return;
     }
 
     try {
-        // 1. 加载 Markdown 文件
+        // 1. 尝试加载文件
+        showError(
+            'Status Update',
+            'Attempting to fetch post file...',
+            {
+                'Post Path': postPath,
+                'Full URL': window.location.href
+            }
+        );
+
         const response = await fetch(postPath);
         if (!response.ok) {
-            throw new Error(`Failed to fetch post file (HTTP ${response.status}). Path: ${postPath}`);
+            throw new Error(`HTTP ${response.status} - ${response.statusText}`);
         }
-        
+
         const markdown = await response.text();
+        showError(
+            'Status Update',
+            'File loaded successfully',
+            {
+                'Content Length': markdown.length,
+                'First 100 chars': markdown.substring(0, 100)
+            }
+        );
 
         // 2. 解析 frontmatter
         let content = markdown;
         let frontmatter = {};
         
         try {
+            showError(
+                'Status Update',
+                'Parsing frontmatter...',
+                {
+                    'Has Frontmatter': markdown.startsWith('---'),
+                    'Content Preview': markdown.substring(0, 200)
+                }
+            );
+
             if (markdown.startsWith('---')) {
                 const endIndex = markdown.indexOf('---', 3);
                 if (endIndex !== -1) {
@@ -37,23 +84,40 @@ async function loadPost() {
                         }
                     });
                     content = markdown.slice(endIndex + 3).trim();
-                } else {
-                    throw new Error('Invalid frontmatter format: Missing ending delimiter');
+
+                    showError(
+                        'Status Update',
+                        'Frontmatter parsed successfully',
+                        {
+                            'Frontmatter': JSON.stringify(frontmatter, null, 2),
+                            'Content Length': content.length
+                        }
+                    );
                 }
             }
         } catch (frontmatterError) {
-            document.getElementById('post-content').innerHTML = `
-                <h1>Warning: Frontmatter Error</h1>
-                <p>The post metadata could not be parsed correctly.</p>
-                <p>Details: ${frontmatterError.message}</p>
-                <hr>
-                <div class="markdown-body">${marked.parse(markdown)}</div>
-            `;
+            showError(
+                'Frontmatter Parsing Error',
+                frontmatterError.message,
+                {
+                    'Error Stack': frontmatterError.stack,
+                    'Raw Content': markdown.substring(0, 500)
+                }
+            );
             return;
         }
 
-        // 3. 配置 marked 和渲染内容
+        // 3. 渲染内容
         try {
+            showError(
+                'Status Update',
+                'Configuring marked and rendering content...',
+                {
+                    'Content Length': content.length,
+                    'Has Frontmatter': Object.keys(frontmatter).length > 0
+                }
+            );
+
             marked.setOptions({
                 highlight: function(code, lang) {
                     try {
@@ -62,7 +126,15 @@ async function loadPost() {
                         }
                         return hljs.highlightAuto(code).value;
                     } catch (highlightError) {
-                        return code; // 返回原始代码
+                        showError(
+                            'Highlight Warning',
+                            'Code highlighting failed, using plain text',
+                            {
+                                'Language': lang,
+                                'Error': highlightError.message
+                            }
+                        );
+                        return code;
                     }
                 },
                 breaks: true,
@@ -70,10 +142,18 @@ async function loadPost() {
             });
 
             const renderedContent = marked.parse(content);
-            document.title = frontmatter.title || 'Blog Post';
+            
+            showError(
+                'Status Update',
+                'Content rendered successfully',
+                {
+                    'Rendered Length': renderedContent.length,
+                    'Title': frontmatter.title || 'No title'
+                }
+            );
 
-            // 创建页头和内容
-            const headerHtml = `
+            // 最终更新页面
+            document.getElementById('post-content').innerHTML = `
                 <header class="post-header">
                     <h1>${frontmatter.title || ''}</h1>
                     <div class="post-meta">
@@ -89,45 +169,35 @@ async function loadPost() {
                         }
                     </div>
                 </header>
+                <div class="markdown-body">
+                    ${renderedContent}
+                </div>
             `;
-
-            document.getElementById('post-content').innerHTML = headerHtml + renderedContent;
-
-            // 初始化语法高亮
-            document.querySelectorAll('pre code').forEach(block => {
-                try {
-                    hljs.highlightBlock(block);
-                } catch (highlightError) {
-                    block.classList.add('no-highlight');
-                }
-            });
 
         } catch (renderError) {
-            document.getElementById('post-content').innerHTML = `
-                <h1>Error: Rendering Failed</h1>
-                <p>The markdown content could not be rendered.</p>
-                <p>Details: ${renderError.message}</p>
-                <hr>
-                <pre class="raw-content">${content}</pre>
-            `;
+            showError(
+                'Rendering Error',
+                renderError.message,
+                {
+                    'Error Stack': renderError.stack,
+                    'Content Preview': content.substring(0, 500),
+                    'Frontmatter': JSON.stringify(frontmatter, null, 2)
+                }
+            );
         }
 
     } catch (error) {
-        document.getElementById('post-content').innerHTML = `
-            <div class="error-container">
-                <h1>Error Loading Post</h1>
-                <p>The post could not be loaded.</p>
-                <div class="error-details">
-                    <h2>Error Details:</h2>
-                    <p>${error.message}</p>
-                    <p>Attempted to load: ${postPath}</p>
-                </div>
-                <div class="error-actions">
-                    <a href="index.html" class="return-home">Return to Home</a>
-                    <button onclick="window.location.reload()" class="retry-button">Try Again</button>
-                </div>
-            </div>
-        `;
+        showError(
+            'Fatal Error',
+            error.message,
+            {
+                'Error Type': error.name,
+                'Error Stack': error.stack,
+                'Post Path': postPath,
+                'Full URL': window.location.href,
+                'Browser Info': navigator.userAgent
+            }
+        );
     }
 }
 
