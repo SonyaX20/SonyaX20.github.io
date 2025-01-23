@@ -116,7 +116,7 @@ function createPostCard(post) {
             <h2>${post.title}</h2>
             <p class="post-date">${post.date}</p>
             <p>${post.summary}</p>
-            <a href="post.html?post=${post.url}" class="read-more">Read More</a>
+            <a href="${post.url.replace('posts/', 'post/').replace('.md', '.html')}" class="read-more">Read More</a>
         </div>
     `;
     
