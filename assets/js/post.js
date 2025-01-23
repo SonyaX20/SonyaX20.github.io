@@ -10,11 +10,15 @@ async function loadPost() {
     }
 
     try {
-        console.log('Attempting to load post:', postPath);
-        const response = await fetch(postPath);
+        // 解码 URL 并移除前导斜杠
+        const cleanPath = decodeURIComponent(postPath).replace(/^\//, '');
+        console.log('Attempting to load post:', cleanPath);
+        
+        const response = await fetch(cleanPath);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
+        
         const markdown = await response.text();
         console.log('Markdown content loaded:', markdown.substring(0, 100) + '...'); // Log first 100 chars
         
