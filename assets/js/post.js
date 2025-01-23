@@ -3,10 +3,10 @@ async function loadPost() {
     const postPath = urlParams.get('post');
     
     if (!postPath) {
-        console.error('Error: No post path provided in URL parameters');
         document.getElementById('post-content').innerHTML = `
             <h1>Error</h1>
-            <p>No post specified.</p>
+            <p>No post path was provided in the URL.</p>
+            <p>Details: Missing 'post' parameter in URL</p>
             <p><a href="index.html">Return to home</a></p>
         `;
         return;
@@ -14,14 +14,12 @@ async function loadPost() {
 
     try {
         // 1. 加载 Markdown 文件
-        console.log('Attempting to fetch:', postPath);
         const response = await fetch(postPath);
         if (!response.ok) {
-            throw new Error(`Failed to load post (HTTP ${response.status})`);
+            throw new Error(`Failed to fetch post file (HTTP ${response.status}). Path: ${postPath}`);
         }
         
         const markdown = await response.text();
-        console.log('Successfully loaded markdown file');
 
         // 2. 解析 frontmatter
         let content = markdown;
@@ -39,19 +37,22 @@ async function loadPost() {
                         }
                     });
                     content = markdown.slice(endIndex + 3).trim();
-                    console.log('Successfully parsed frontmatter:', frontmatter);
                 } else {
-                    console.warn('No ending frontmatter delimiter found');
+                    throw new Error('Invalid frontmatter format: Missing ending delimiter');
                 }
-            } else {
-                console.warn('No frontmatter found in markdown');
             }
         } catch (frontmatterError) {
-            console.error('Error parsing frontmatter:', frontmatterError);
-            frontmatter = {};
+            document.getElementById('post-content').innerHTML = `
+                <h1>Warning: Frontmatter Error</h1>
+                <p>The post metadata could not be parsed correctly.</p>
+                <p>Details: ${frontmatterError.message}</p>
+                <hr>
+                <div class="markdown-body">${marked.parse(markdown)}</div>
+            `;
+            return;
         }
 
-        // 3. 配置 marked
+        // 3. 配置 marked 和渲染内容
         try {
             marked.setOptions({
                 highlight: function(code, lang) {
@@ -61,41 +62,18 @@ async function loadPost() {
                         }
                         return hljs.highlightAuto(code).value;
                     } catch (highlightError) {
-                        console.error('Error highlighting code:', highlightError);
                         return code; // 返回原始代码
                     }
                 },
                 breaks: true,
                 gfm: true
             });
-            console.log('Marked options configured successfully');
-        } catch (markedError) {
-            console.error('Error configuring marked:', markedError);
-            throw markedError;
-        }
 
-        // 4. 渲染内容
-        let renderedContent;
-        try {
-            renderedContent = marked.parse(content);
-            console.log('Successfully rendered markdown content');
-        } catch (renderError) {
-            console.error('Error rendering markdown:', renderError);
-            throw renderError;
-        }
-
-        // 5. 更新页面标题
-        try {
+            const renderedContent = marked.parse(content);
             document.title = frontmatter.title || 'Blog Post';
-            console.log('Page title updated:', document.title);
-        } catch (titleError) {
-            console.error('Error updating page title:', titleError);
-        }
 
-        // 6. 创建页头
-        let headerHtml;
-        try {
-            headerHtml = `
+            // 创建页头和内容
+            const headerHtml = `
                 <header class="post-header">
                     <h1>${frontmatter.title || ''}</h1>
                     <div class="post-meta">
@@ -112,44 +90,45 @@ async function loadPost() {
                     </div>
                 </header>
             `;
-            console.log('Header HTML generated successfully');
-        } catch (headerError) {
-            console.error('Error creating header HTML:', headerError);
-            headerHtml = `<header class="post-header"><h1>${frontmatter.title || 'Error'}</h1></header>`;
-        }
 
-        // 7. 更新页面内容
-        try {
             document.getElementById('post-content').innerHTML = headerHtml + renderedContent;
-            console.log('Page content updated successfully');
-        } catch (updateError) {
-            console.error('Error updating page content:', updateError);
-            throw updateError;
-        }
 
-        // 8. 初始化语法高亮
-        try {
-            document.querySelectorAll('pre code').forEach(block => hljs.highlightBlock(block));
-            console.log('Syntax highlighting initialized');
-        } catch (highlightError) {
-            console.error('Error initializing syntax highlighting:', highlightError);
+            // 初始化语法高亮
+            document.querySelectorAll('pre code').forEach(block => {
+                try {
+                    hljs.highlightBlock(block);
+                } catch (highlightError) {
+                    block.classList.add('no-highlight');
+                }
+            });
+
+        } catch (renderError) {
+            document.getElementById('post-content').innerHTML = `
+                <h1>Error: Rendering Failed</h1>
+                <p>The markdown content could not be rendered.</p>
+                <p>Details: ${renderError.message}</p>
+                <hr>
+                <pre class="raw-content">${content}</pre>
+            `;
         }
 
     } catch (error) {
-        console.error('Fatal error in loadPost:', error);
         document.getElementById('post-content').innerHTML = `
-            <h1>Error loading post</h1>
-            <p>The post could not be loaded.</p>
-            <p>Error details: ${error.message}</p>
-            <p><a href="index.html">Return to home</a></p>
+            <div class="error-container">
+                <h1>Error Loading Post</h1>
+                <p>The post could not be loaded.</p>
+                <div class="error-details">
+                    <h2>Error Details:</h2>
+                    <p>${error.message}</p>
+                    <p>Attempted to load: ${postPath}</p>
+                </div>
+                <div class="error-actions">
+                    <a href="index.html" class="return-home">Return to Home</a>
+                    <button onclick="window.location.reload()" class="retry-button">Try Again</button>
+                </div>
+            </div>
         `;
     }
 }
 
-// 加载文章
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('Page loaded, starting post load process');
-    loadPost().catch(error => {
-        console.error('Unhandled error in loadPost:', error);
-    });
-}); 
+document.addEventListener('DOMContentLoaded', loadPost); 
