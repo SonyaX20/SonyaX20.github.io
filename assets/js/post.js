@@ -21,36 +21,66 @@ async function loadPost() {
     }
 
     if (!postPath) {
-        showError(
-            'URL Parameter Error',
-            'No post path provided in URL',
-            {
-                'Current URL': window.location.href,
-                'Search Params': window.location.search,
-                'Expected Format': 'post.html?post=posts/example.md'
-            }
-        );
+        showError('URL Parameter Error', 'No post path provided in URL');
         return;
     }
 
     try {
-        // 构建 GitHub raw content URL
-        const rawGitHubUrl = `https://raw.githubusercontent.com/SonyaX20/SonyaX20.github.io/main/${postPath}`;
-        
+        // 尝试多个可能的 URL
+        const possibleUrls = [
+            // 1. 直接从当前域名获取
+            postPath,
+            // 2. 从 GitHub Pages URL 获取
+            `https://sonyax20.github.io/${postPath}`,
+            // 3. 从 GitHub raw content 获取
+            `https://raw.githubusercontent.com/SonyaX20/SonyaX20.github.io/main/${postPath}`,
+            // 4. 相对路径尝试
+            `../${postPath}`,
+            `./${postPath}`
+        ];
+
         showError(
             'Status Update',
             'Attempting to fetch post file...',
             {
                 'Original Path': postPath,
-                'Raw GitHub URL': rawGitHubUrl,
-                'Full Page URL': window.location.href
+                'Trying URLs': JSON.stringify(possibleUrls, null, 2)
             }
         );
 
-        const response = await fetch(rawGitHubUrl);
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status} - ${response.statusText}`);
+        let response;
+        let successUrl;
+        
+        // 尝试所有可能的 URL
+        for (const url of possibleUrls) {
+            try {
+                showError('Status Update', `Trying URL: ${url}`);
+                response = await fetch(url);
+                if (response.ok) {
+                    successUrl = url;
+                    break;
+                }
+            } catch (fetchError) {
+                showError('Fetch Attempt Failed', `Failed to fetch from ${url}`, {
+                    'Error': fetchError.message
+                });
+                continue;
+            }
         }
+
+        if (!response?.ok) {
+            throw new Error('Failed to fetch content from all attempted URLs');
+        }
+
+        showError(
+            'Status Update',
+            'File loaded successfully',
+            {
+                'Successful URL': successUrl,
+                'Response Status': response.status,
+                'Content Type': response.headers.get('content-type')
+            }
+        );
 
         const markdown = await response.text();
         showError(
@@ -197,9 +227,10 @@ async function loadPost() {
                 'Error Type': error.name,
                 'Error Stack': error.stack,
                 'Original Path': postPath,
-                'Raw GitHub URL': `https://raw.githubusercontent.com/SonyaX20/SonyaX20.github.io/main/${postPath}`,
                 'Full URL': window.location.href,
-                'Browser Info': navigator.userAgent
+                'Browser Info': navigator.userAgent,
+                'Current Location': window.location.toString(),
+                'Base URL': document.baseURI
             }
         );
     }
