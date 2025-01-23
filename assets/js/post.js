@@ -1,6 +1,6 @@
 async function loadPost() {
-    const urlParams = new URLSearchParams(window.location.search);
-    let postPath = urlParams.get('post');
+    // 使用 hash 而不是查询参数
+    const postPath = window.location.hash.slice(1); // 移除开头的 #
     
     if (!postPath) {
         console.error('No post path provided');
@@ -9,19 +9,14 @@ async function loadPost() {
     }
 
     try {
-        // 处理 URL 编码
-        postPath = postPath.replace(/%2F/gi, '/');  // 直接替换 %2F 为 /
-        postPath = postPath.replace(/^\/+/, '');    // 移除开头的斜杠
-        
-        console.log('Processing post path:', postPath);
-        
+        console.log('Attempting to load post:', postPath);
         const response = await fetch(postPath);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         
         const markdown = await response.text();
-        console.log('Markdown content loaded:', markdown.substring(0, 100) + '...'); // Log first 100 chars
+        console.log('Markdown content loaded:', markdown.substring(0, 100) + '...');
         
         // Parse YAML frontmatter
         let content = markdown;
@@ -97,7 +92,6 @@ async function loadPost() {
 
     } catch (error) {
         console.error('Detailed error loading post:', error);
-        console.error('Post path was:', postPath);
         document.getElementById('post-content').innerHTML = `
             <h1>Error loading post</h1>
             <p>The post could not be loaded.</p>
@@ -123,5 +117,8 @@ function share(platform) {
     window.open(shareUrl, '_blank', 'width=600,height=400');
 }
 
-// Load post when page loads
+// 添加 hash 变化监听器，以便支持浏览器的前进/后退按钮
+window.addEventListener('hashchange', loadPost);
+
+// 初始加载
 document.addEventListener('DOMContentLoaded', loadPost); 
