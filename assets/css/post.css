@@ -8,8 +8,9 @@
 }
 
 .markdown-body {
+    max-width: 900px;
+    margin: 0 auto;
     padding: 2rem;
-    line-height: 1.8;
 }
 
 .markdown-body h1 {
@@ -37,24 +38,99 @@
 }
 
 .markdown-body code {
-    background: #f6f8fa;
-    padding: 0.2rem 0.4rem;
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+    background-color: #1a1b26 !important;
+    color: #a9b1d6 !important;
     border-radius: 3px;
-    font-family: 'Consolas', monospace;
-    font-size: 0.9em;
 }
 
 .markdown-body pre {
-    background: #f6f8fa;
-    padding: 1rem;
-    border-radius: 5px;
-    overflow-x: auto;
-    margin: 1.5rem 0;
+    margin: 1em 0;
+    padding: 1em;
+    background-color: #1a1b26 !important;
+    border-radius: 6px;
+    overflow: auto;
+    border: 1px solid #2f3146;
 }
 
 .markdown-body pre code {
-    background: none;
+    display: block;
     padding: 0;
+    overflow-x: auto;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.85em;
+    line-height: 1.45;
+    background-color: #1a1b26 !important;
+    color: #a9b1d6 !important;
+    border: 0;
+}
+
+.markdown-body .hljs-keyword {
+    color: #ff79c6 !important;
+}
+
+.markdown-body .hljs-string {
+    color: #7af8ca !important;
+}
+
+.markdown-body .hljs-comment {
+    color: #7970a9 !important;
+    font-style: italic;
+}
+
+.markdown-body .hljs-function {
+    color: #82aaff !important;
+}
+
+.markdown-body .hljs-number {
+    color: #ff9e64 !important;
+}
+
+.markdown-body .hljs-operator {
+    color: #89ddff !important;
+}
+
+.markdown-body .hljs-class {
+    color: #ffd700 !important;
+}
+
+.markdown-body .hljs-variable {
+    color: #bd93f9 !important;
+}
+
+.markdown-body .hljs-params {
+    color: #ffb86c !important;
+}
+
+.markdown-body .hljs-built_in {
+    color: #50fa7b !important;
+}
+
+.markdown-body .hljs-property {
+    color: #8be9fd !important;
+}
+
+.markdown-body .hljs-title {
+    color: #50fa7b !important;
+}
+
+.markdown-body .hljs-attr {
+    color: #f1fa8c !important;
+}
+
+.markdown-body .hljs-template-variable,
+.markdown-body .hljs-interpolation {
+    color: #ff79c6 !important;
+}
+
+.markdown-body .hljs-subst {
+    color: #a9b1d6 !important;
+}
+
+.markdown-body .hljs-string .hljs-subst {
+    color: #ff79c6 !important;
 }
 
 .post-footer {
@@ -177,5 +253,12 @@
     .pricing-table th,
     .pricing-table td {
         padding: 8px 10px;
+    }
+} 
+
+/* Make code blocks responsive */
+@media screen and (max-width: 768px) {
+    .markdown-body pre code {
+        font-size: 0.8em;
     }
 } 

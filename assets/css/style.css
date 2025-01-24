@@ -26,6 +26,21 @@ nav {
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 999;
+    transition: left 0.3s ease;
+}
+
+/* 添加新的类用于主页的导航栏 */
+body.has-sidebar nav {
+    left: 250px;
+}
+
+body.has-sidebar nav.sidebar-collapsed {
+    left: 0;
 }
 
 .nav-brand {
@@ -232,4 +247,127 @@ footer {
     margin-right: 10px;
     vertical-align: middle;
     border-radius: 2px;
+}
+
+/* 添加左侧导航栏样式 */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 250px;
+    background: white;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    padding-top: 60px;
+    overflow-y: auto;
+}
+
+.sidebar.collapsed {
+    transform: translateX(-250px);
+}
+
+.sidebar-toggle {
+    position: fixed;
+    left: 250px;
+    top: 70px;
+    background: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    border-radius: 0 4px 4px 0;
+    transition: left 0.3s ease;
+    z-index: 1000;
+}
+
+.sidebar-toggle.collapsed {
+    left: 0;
+}
+
+.sidebar-toggle i {
+    color: var(--primary-color);
+}
+
+.posts-list {
+    list-style: none;
+    padding: 0 1rem;
+}
+
+.posts-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.posts-list a {
+    text-decoration: none;
+    color: var(--text-color);
+    display: block;
+    transition: color 0.3s;
+}
+
+.posts-list a:hover {
+    color: var(--secondary-color);
+}
+
+/* 调整主内容区域的上边距，为固定导航栏留出空间 */
+main {
+    padding-top: 60px;  /* 根据导航栏高度调整 */
+}
+
+/* 当有侧边栏时的主内容区域样式 */
+body.has-sidebar main {
+    margin-left: 250px;
+    transition: margin-left 0.3s ease;
+}
+
+body.has-sidebar main.sidebar-collapsed {
+    margin-left: 0;
+}
+
+/* Code block styling */
+.markdown-content pre code,
+article pre code {
+    font-size: 0.85em !important;
+    line-height: 1.4 !important;
+    padding: 1em !important;
+    border-radius: 4px !important;
+    background-color: #f8f8f8 !important;
+    display: block;
+    overflow-x: auto;
+    max-width: 100%;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+/* Style the code block container */
+.markdown-content pre,
+article pre {
+    margin: 1em 0;
+    background-color: #f8f8f8;
+    border: 1px solid #e1e1e8;
+    border-radius: 4px;
+    padding: 0.5em;
+}
+
+/* Optional: Add syntax highlighting colors */
+.hljs-keyword {
+    color: #0033cc;
+}
+
+.hljs-string {
+    color: #008800;
+}
+
+.hljs-comment {
+    color: #666666;
+    font-style: italic;
+}
+
+/* Make code blocks responsive */
+@media screen and (max-width: 768px) {
+    pre code {
+        font-size: 0.8em;
+        padding: 0.8em;
+    }
 } 
