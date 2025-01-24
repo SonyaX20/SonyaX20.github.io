@@ -8,6 +8,13 @@ const posts = [
         url: 'posts/welcome.md'
     },
     {
+        title: 'Latest Developments and Applications of ResNet',
+        date: '2025-01-24',
+        summary: 'An in-depth exploration of ResNet, a powerful platform for computer vision tasks including dataset management, model training, and deployment.',
+        image: 'assets/images/posts/pc.png',
+        url: 'posts/resnet.md'
+    },
+    {
         title: 'Understanding Off-the-Shelf Models in Computer Vision',
         date: '2025-01-24',
         summary: 'An in-depth exploration of off-the-shelf models in computer vision, a powerful platform for computer vision tasks including dataset management, model training, and deployment.',
