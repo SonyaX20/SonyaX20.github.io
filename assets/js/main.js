@@ -5,7 +5,7 @@ const posts = [
         date: '2024-03-20',
         summary: 'This is my first blog post, introducing how this website was built...',
         image: 'assets/images/posts/image.png',
-        url: 'posts/welcome.html'
+        url: 'posts/welcome.md'
     },
     {
         title: 'How to Build a Blog with GitHub Pages',
