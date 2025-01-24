@@ -293,16 +293,37 @@
     color: white;
 }
 
-/* 移动端适配 */
+/* 修改语言切换按钮的移动端样式 */
 @media (max-width: 768px) {
     .language-switch {
         position: sticky;
-        top: 0;
+        /* 增加 top 值以避免被导航栏遮挡 */
+        top: 60px; /* 根据实际导航栏高度调整 */
         background: white;
-        z-index: 100;
+        z-index: 99; /* 确保在导航栏之下 */
         margin: 0;
         padding: 0.5rem;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    /* 为了避免切换按钮突然出现的跳动，给内容添加上边距 */
+    .markdown-body {
+        padding-top: 3rem;
+    }
+
+    /* 确保导航栏始终在最上层 */
+    header nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: white;
+    }
+
+    /* 为固定定位的导航栏腾出空间 */
+    body {
+        padding-top: 60px; /* 与导航栏高度相同 */
     }
 
     .language-switch button {

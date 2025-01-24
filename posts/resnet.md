@@ -6,8 +6,8 @@ tags: ["deep learning", "computer vision", "ResNet", "neural networks"]
 
 <!-- en button -->
 <div class="language-switch">
-  <button class="active" onclick="window.location.href='post.html?post=posts/resnet-cn.md'">中文</button>
-  <button onclick="window.location.href='post.html?post=posts/resnet.md'">English</button>
+  <button onclick="window.location.href='post.html?post=posts/resnet-cn.md'">中文</button>
+  <button class="active"onclick="window.location.href='post.html?post=posts/resnet.md'">English</button>
 </div>
 
 # Latest Developments and Applications of ResNet
