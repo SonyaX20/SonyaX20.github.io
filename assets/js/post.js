@@ -10,6 +10,9 @@ async function loadPost() {
 
     try {
         const response = await fetch(postPath);
+        if (!response.ok) {
+            throw new Error('Post not found');
+        }
         const markdown = await response.text();
         
         // Configure marked options
@@ -36,6 +39,18 @@ async function loadPost() {
         // Update page title
         const title = document.querySelector('h1')?.textContent || 'Blog Post';
         document.title = `${title} - Sonya's Blog`;
+
+        // Add event listeners to language switch buttons after content is loaded
+        document.querySelectorAll('.language-switch button').forEach(button => {
+            const onclick = button.getAttribute('onclick');
+            if (onclick) {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const href = onclick.match(/'([^']+)'/)[1];
+                    window.location.href = href;
+                });
+            }
+        });
 
     } catch (error) {
         console.error('Error loading post:', error);

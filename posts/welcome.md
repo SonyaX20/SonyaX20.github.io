@@ -1,7 +1,5 @@
 # Welcome to My Blog
 
-<img src="../assets/images/welcome.png" class="post-image" alt="Welcome">
-
 ## Introduction
 
 This is my personal blog where I'll share technical articles and life experiences.

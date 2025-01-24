@@ -4,6 +4,12 @@ date: 2024-03-21
 categories: [Computer Vision, Deep Learning]
 tags: [computer-vision, deep-learning, pre-trained-models, transfer-learning]
 --- -->
+
+<div class="language-switch">
+  <button onclick="window.location.href='post.html?post=posts/off-the-shelf-models-cn.md'">中文</button>
+  <button class="active" onclick="window.location.href='post.html?post=posts/off-the-shelf-models.md'">English</button>
+</div>
+
 # Understanding Off-the-Shelf Models in Computer Vision
 
 ## Introduction
@@ -150,7 +156,7 @@ Off-the-shelf models in computer vision represent pre-trained neural networks th
 
 ## Practical Example
 
-Here’s how you can use an off-the-shelf ResNet-50 model for an image classification task:
+Here's how you can use an off-the-shelf ResNet-50 model for an image classification task:
 ``` python
 import torch
 from torchvision import models, transforms
