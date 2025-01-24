@@ -4,6 +4,12 @@ date: 2025-01-23
 categories: [Computer Vision, Tools]
 tags: [roboflow, computer-vision, machine-learning, datasets]
 --- -->
+
+<div class="language-switch">
+  <button onclick="window.location.href='post.html?post=posts/roboflow-intro-cn.md'">中文</button>
+  <button class="active" onclick="window.location.href='post.html?post=posts/roboflow-intro.md'">English</button>
+</div>
+
 # A Comprehensive Guide to Roboflow Universe
 
 ## Introduction
