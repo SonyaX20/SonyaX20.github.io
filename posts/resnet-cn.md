@@ -9,7 +9,7 @@ tags: ["深度学习", "计算机视觉", "ResNet", "神经网络"]
   <button onclick="window.location.href='post.html?post=posts/resnet.md'">English</button>
 </div>
 
-# ResNet(残差网络)的最新进展与应用
+# 残差网络的最新进展与应用
 
 ResNet（残差网络）自提出以来，在计算机视觉领域取得了广泛应用和持续发展。
 

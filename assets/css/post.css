@@ -262,3 +262,53 @@
         font-size: 0.8em;
     }
 } 
+
+/* 语言切换按钮样式 */
+.language-switch {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+    padding: 0.5rem;
+}
+
+.language-switch button {
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 4px;
+    background: white;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.language-switch button.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+.language-switch button:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .language-switch {
+        position: sticky;
+        top: 0;
+        background: white;
+        z-index: 100;
+        margin: 0;
+        padding: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .language-switch button {
+        flex: 1;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
+} 
