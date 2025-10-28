@@ -377,7 +377,7 @@ const AboutEducationCombined = () => {
   // Photo configuration - Fixed positions and sizes
   const photos = [
     {
-      src: '/src/assets/me0.png', // mountain
+      src: '../assets/me0.png', // mountain
       top: '40%',
       left: '30%',
       width: '180px',
@@ -387,7 +387,7 @@ const AboutEducationCombined = () => {
       zIndex: 25,
     },
     {
-      src: '/src/assets/me1.png', // freiburg
+      src: '../assets/me1.png', // freiburg
       top: '30%',
       left: '8%',
       width: '200px',
@@ -397,7 +397,7 @@ const AboutEducationCombined = () => {
       zIndex: 40,
     },
     {
-      src: '/src/assets/me4.png', //travel
+      src: '../assets/me4.png', //travel
       top: '0%',
       left: '25%',
       width: '160px',
@@ -407,7 +407,7 @@ const AboutEducationCombined = () => {
       zIndex: 1,
     },
     {
-      src: '/src/assets/me5.png', // working
+      src: '../assets/me5.png', // working
       bottom: '45%',
       right: '10%',
       width: '220px',
@@ -417,7 +417,7 @@ const AboutEducationCombined = () => {
       zIndex: 18,
     },
     {
-      src: '/src/assets/me6.png', //head
+      src: '../assets/me6.png', //head
       bottom: '30%',
       left: '40%',
       width: '170px',
@@ -427,7 +427,7 @@ const AboutEducationCombined = () => {
       zIndex: 22,
     },
     {
-      src: '/src/assets/me9.png', // snow
+      src: '../assets/me9.png', // snow
       bottom: '5%',
       right: '10%',
       width: '175px',
