@@ -10,14 +10,6 @@ import Projects from '../components/Projects';
 import Contact from '../components/Contact';
 import { GraduationCap, Calendar, Award, BookOpen } from 'lucide-react';
 
-// Import images
-import me0 from '../assets/me0.png';
-import me1 from '../assets/me1.png';
-import me4 from '../assets/me4.png';
-import me5 from '../assets/me5.png';
-import me6 from '../assets/me6.png';
-import me9 from '../assets/me9.png';
-
 // Lazy load the animation component
 const Hero3D = lazy(() => import('../components/Hero3D'));
 
@@ -385,7 +377,7 @@ const AboutEducationCombined = () => {
   // Photo configuration - Fixed positions and sizes
   const photos = [
     {
-      src: me0, // mountain
+      src: '/src/assets/me0.png', // mountain
       top: '40%',
       left: '30%',
       width: '180px',
@@ -395,7 +387,7 @@ const AboutEducationCombined = () => {
       zIndex: 25,
     },
     {
-      src: me1, // freiburg
+      src: '/src/assets/me1.png', // freiburg
       top: '30%',
       left: '8%',
       width: '200px',
@@ -405,7 +397,7 @@ const AboutEducationCombined = () => {
       zIndex: 40,
     },
     {
-      src: me4, //travel
+      src: '/src/assets/me4.png', //travel
       top: '0%',
       left: '25%',
       width: '160px',
@@ -415,7 +407,7 @@ const AboutEducationCombined = () => {
       zIndex: 1,
     },
     {
-      src: me5, // working
+      src: '/src/assets/me5.png', // working
       bottom: '45%',
       right: '10%',
       width: '220px',
@@ -425,7 +417,7 @@ const AboutEducationCombined = () => {
       zIndex: 18,
     },
     {
-      src: me6, //head
+      src: '/src/assets/me6.png', //head
       bottom: '30%',
       left: '40%',
       width: '170px',
@@ -435,7 +427,7 @@ const AboutEducationCombined = () => {
       zIndex: 22,
     },
     {
-      src: me9, // snow
+      src: '/src/assets/me9.png', // snow
       bottom: '5%',
       right: '10%',
       width: '175px',
