@@ -54,7 +54,119 @@ const PodcastAIPMSummary = () => {
         </header>
 
         <main className="space-y-10 text-gray-800 leading-relaxed">
-          <section>
+          {/* Overview & SEO-friendly intro */}
+          <section className="space-y-4">
+            {lang === 'en' ? (
+              <>
+                <p>
+                  This page captures key insights from <strong>"How AI is reshaping the product role"</strong> on
+                  Lenny&apos;s Podcast, featuring Oji and Ezinne Udezue. It focuses on how AI is changing the role of the
+                  product manager, the <strong>core skills for AI-era PMs</strong>, the <strong>Shipyard model</strong>
+                  , and practical action items for product leaders.
+                </p>
+                <div>
+                  <p className="text-sm font-semibold text-amber-800 mb-2">On this page</p>
+                  <ul className="list-disc pl-5 text-sm space-y-1 text-amber-900">
+                    <li>
+                      <a href="#podcast-guests" className="hover:underline">
+                        Podcast &amp; guests
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#ai-role-change" className="hover:underline">
+                        How AI is transforming the product manager role
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#core-skills" className="hover:underline">
+                        Core skills for product managers in the AI era
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#shipyard" className="hover:underline">
+                        The Shipyard product-development model
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#ai-companies" className="hover:underline">
+                        Traits of companies that use AI successfully
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#key-lessons" className="hover:underline">
+                        Key lessons from 50 years of product experience
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#ai-home" className="hover:underline">
+                        Oji&apos;s AI home-automation project
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#action-items" className="hover:underline">
+                        Action items for AI-era product managers
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </>
+            ) : (
+              <>
+                <p>
+                  本页整理自 Lenny&apos;s Podcast《How AI is reshaping the product role》一集，由 Oji 和 Ezinne Udezue
+                  分享 <strong>AI 时代产品经理角色的变化</strong>、
+                  <strong>核心能力与思维方式</strong>、<strong>造船厂（Shipyard）产品开发模式</strong>，以及可直接实践的行动建议。
+                </p>
+                <div>
+                  <p className="text-sm font-semibold text-amber-800 mb-2">页面结构</p>
+                  <ul className="list-disc pl-5 text-sm space-y-1 text-amber-900">
+                    <li>
+                      <a href="#podcast-guests" className="hover:underline">
+                        播客与嘉宾简介
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#ai-role-change" className="hover:underline">
+                        AI 时代产品经理角色的变革
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#core-skills" className="hover:underline">
+                        AI 时代产品经理的核心技能
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#shipyard" className="hover:underline">
+                        产品开发新模式：造船厂（Shipyard）
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#ai-companies" className="hover:underline">
+                        成功应用 AI 的公司特征
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#key-lessons" className="hover:underline">
+                        50 年产品经验的关键教训
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#ai-home" className="hover:underline">
+                        Oji 的 AI 家庭自动化项目
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#action-items" className="hover:underline">
+                        行动项目
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </>
+            )}
+          </section>
+
+          <section id="podcast-guests">
             <h2 className="text-xl font-semibold text-gray-900 mb-3">
               {lang === 'en' ? 'Podcast & Guests' : '播客与嘉宾简介'}
             </h2>
@@ -124,9 +236,10 @@ const PodcastAIPMSummary = () => {
               </ul>
             )}
           </section>
+
           {lang === 'en' ? (
             <>
-              <section>
+              <section id="ai-role-change">
                 <h2 className="text-xl font-semibold text-gray-900 mb-3">
                   How AI Is Transforming the Role of the Product Manager
                 </h2>
@@ -154,7 +267,7 @@ const PodcastAIPMSummary = () => {
                 </ul>
               </section>
 
-              <section>
+              <section id="core-skills">
                 <h2 className="text-xl font-semibold text-gray-900 mb-3">
                   Core Skills for Product Managers in the AI Era
                 </h2>
@@ -209,7 +322,7 @@ const PodcastAIPMSummary = () => {
                 </ol>
               </section>
 
-              <section>
+              <section id="shipyard">
                 <h2 className="text-xl font-semibold text-gray-900 mb-3">
                   A New Product-Development Model: The “Shipyard”
                 </h2>
@@ -237,7 +350,7 @@ const PodcastAIPMSummary = () => {
                 </ul>
               </section>
 
-              <section>
+              <section id="ai-companies">
                 <h2 className="text-xl font-semibold text-gray-900 mb-3">
                   Characteristics of Companies That Use AI Successfully
                 </h2>
@@ -266,7 +379,7 @@ const PodcastAIPMSummary = () => {
                 </ul>
               </section>
 
-              <section>
+              <section id="key-lessons">
                 <h2 className="text-xl font-semibold text-gray-900 mb-3">
                   Key Lessons From 50 Years of Product Experience
                 </h2>
@@ -296,7 +409,7 @@ const PodcastAIPMSummary = () => {
                 </ul>
               </section>
 
-              <section>
+              <section id="ai-home">
                 <h2 className="text-xl font-semibold text-gray-900 mb-3">Oji&apos;s AI Home-Automation Project</h2>
                 <ul className="list-disc pl-5 space-y-2">
                   <li>
@@ -318,7 +431,7 @@ const PodcastAIPMSummary = () => {
                 </ul>
               </section>
 
-              <section>
+              <section id="action-items">
                 <h2 className="text-xl font-semibold text-gray-900 mb-3">Action Items</h2>
                 <ul className="list-disc pl-5 space-y-2">
                   <li>
@@ -343,7 +456,7 @@ const PodcastAIPMSummary = () => {
             </>
           ) : (
             <>
-              <section>
+              <section id="ai-role-change">
                 <h2 className="text-xl font-semibold text-gray-900 mb-3">AI时代产品经理角色的变革</h2>
                 <ul className="list-disc pl-5 space-y-2">
                   <li>针对“AI会让产品经理失业”的说法，嘉宾提出了不同见解。</li>
@@ -365,7 +478,7 @@ const PodcastAIPMSummary = () => {
                 </ul>
               </section>
 
-              <section>
+              <section id="core-skills">
                 <h2 className="text-xl font-semibold text-gray-900 mb-3">AI时代产品经理的核心技能</h2>
                 <ol className="list-decimal pl-5 space-y-4">
                   <li>
@@ -395,7 +508,7 @@ const PodcastAIPMSummary = () => {
                 </ol>
               </section>
 
-              <section>
+              <section id="shipyard">
                 <h2 className="text-xl font-semibold text-gray-900 mb-3">产品开发新模式：造船厂（Shipyard）概念</h2>
                 <ul className="list-disc pl-5 space-y-2">
                   <li>造船厂是一种可控的混乱，看似杂乱但实际高度协调。</li>
@@ -412,7 +525,7 @@ const PodcastAIPMSummary = () => {
                 </ul>
               </section>
 
-              <section>
+              <section id="ai-companies">
                 <h2 className="text-xl font-semibold text-gray-900 mb-3">成功应用 AI 的公司特征</h2>
                 <ul className="list-disc pl-5 space-y-2">
                   <li>
@@ -439,7 +552,7 @@ const PodcastAIPMSummary = () => {
                 </ul>
               </section>
 
-              <section>
+              <section id="key-lessons">
                 <h2 className="text-xl font-semibold text-gray-900 mb-3">50年产品经验的关键教训</h2>
                 <ul className="list-disc pl-5 space-y-2">
                   <li>聚焦尖锐问题：选择真正能解决人们痛点的问题，这是成功的关键预测因素。</li>
@@ -451,7 +564,7 @@ const PodcastAIPMSummary = () => {
                 </ul>
               </section>
 
-              <section>
+              <section id="ai-home">
                 <h2 className="text-xl font-semibold text-gray-900 mb-3">Oji的 AI 家庭自动化项目</h2>
                 <ul className="list-disc pl-5 space-y-2">
                   <li>打造智能家居，给家里装上"眼睛和耳朵"。</li>
@@ -462,7 +575,7 @@ const PodcastAIPMSummary = () => {
                 </ul>
               </section>
 
-              <section>
+              <section id="action-items">
                 <h2 className="text-xl font-semibold text-gray-900 mb-3">行动项目</h2>
                 <ul className="list-disc pl-5 space-y-2">
                   <li>产品经理应培养好奇心、谦逊和主动性，主动学习AI相关知识和技能。</li>

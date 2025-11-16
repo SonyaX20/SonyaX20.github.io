@@ -102,7 +102,7 @@ const Home = () => {
                   transform: `translate(${parallaxLayers.slow.x}px, ${parallaxLayers.slow.y}px)`,
                 }}
               >
-                Computer Engineering M.Sc. | AI Native 
+                AI Product Manager · Computer Engineering M.Sc. @ Technical University of Berlin
               </motion.p>
 
               <motion.p
@@ -111,10 +111,10 @@ const Home = () => {
                   transform: `translate(${parallaxLayers.slow.x}px, ${parallaxLayers.slow.y}px)`,
                 }}
               >
-                Berlin-based product enthusiast with a unique blend of technical expertise 
-                and product management experience. I specialize in driving AI-powered solutions 
-                from concept to deployment, leveraging data-driven insights to create exceptional 
-                user experiences.
+                Berlin-based product manager and engineer with a B.Sc. in Computer Science from Beijing Jiaotong
+                University and ongoing M.Sc. studies in Computer Engineering at TU Berlin. I work at the intersection
+                of product strategy, AI/ML (NLP, deep learning, computer vision) and full-stack development, turning
+                data-driven insights into shipped, user-centric features.
               </motion.p>
 
               {/* CTA Button */}
