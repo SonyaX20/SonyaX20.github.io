@@ -1,26 +1,18 @@
 import { Calendar, Clock, ArrowRight, Tag } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const BlogPage = () => {
   const blogPosts = [
     {
-      title: 'Product Management',
+      title: "How AI is reshaping the product role · Highlights",
       excerpt:
-        'Exploring the transition from technical engineering to product management, and how my technical background helps me build better products.',
-      date: 'October 15, 2025',
-      readTime: '0 min read',
-      category: 'Career',
-      tags: ['Product Management', 'Career', 'Tech'],
-      image: '🚀',
-    },
-    {
-      title: 'Building AI Products',
-      excerpt:
-        'Key takeaways from managing AI-driven products, including challenges with model performance, A/B testing, and user feedback.',
-      date: 'September 28, 2025',
-      readTime: '0 min read',
-      category: 'AI & ML',
-      tags: ['AI', 'Product Management', 'Machine Learning'],
-      image: '🤖',
+        "Highlights from 'How AI is reshaping the product role | Oji and Ezinne Udezue' on Lenny's Podcast — covering how AI changes the PM role, the core skills needed, and the Shipyard model.",
+      date: 'November 16, 2025',
+      readTime: '3 min read',
+      category: 'Product Management',
+      tags: ['AI', 'Product Management', 'Podcast'],
+      image: '🎧',
+      link: '/blog/ai-pm-podcast-summary',
     },
   ];
 
@@ -32,22 +24,22 @@ const BlogPage = () => {
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
             Blog & Insights
           </h1>
-          <div className="w-20 h-1 bg-gradient-to-r from-purple-600 to-pink-600 mx-auto mb-6"></div>
+          <div className="w-20 h-1 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-700 mx-auto mb-6"></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Thoughts on product management, AI, technology
+            Notes and reflections on product management and AI
           </p>
         </div>
 
         {/* Featured Post */}
         {blogPosts[0] && (
           <div className="mb-16">
-            <div className="bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 rounded-3xl p-1 shadow-2xl">
+            <div className="bg-gradient-to-br from-amber-400 via-orange-500 to-amber-700 rounded-3xl p-1 shadow-2xl">
               <div className="bg-white rounded-3xl p-8 md:p-12">
                 <div className="flex items-center space-x-2 mb-4">
-                  <span className="px-3 py-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full text-xs font-semibold">
+                  <span className="px-3 py-1 bg-gradient-to-r from-amber-600 to-orange-500 text-white rounded-full text-xs font-semibold">
                     Featured Post
                   </span>
-                  <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">
+                  <span className="px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-xs font-semibold">
                     {blogPosts[0].category}
                   </span>
                 </div>
@@ -72,10 +64,15 @@ const BlogPage = () => {
                       </div>
                     </div>
 
-                    <button className="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-semibold hover:scale-105 transition-transform shadow-lg">
-                      <span>Read More</span>
-                      <ArrowRight className="h-5 w-5" />
-                    </button>
+                    {blogPosts[0].link && (
+                      <Link
+                        to={blogPosts[0].link}
+                        className="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-amber-600 to-orange-500 text-white rounded-lg font-semibold hover:scale-105 transition-transform shadow-lg"
+                      >
+                        <span>Read More</span>
+                        <ArrowRight className="h-5 w-5" />
+                      </Link>
+                    )}
                   </div>
 
                   <div className="flex items-center justify-center">
@@ -89,20 +86,20 @@ const BlogPage = () => {
 
         {/* Blog Posts Grid */}
         <div className="grid grid-cols-1 gap-8 max-w-2xl mx-auto">
-          {blogPosts.slice(1).map((post, index) => (
+          {blogPosts.map((post, index) => (
             <article
               key={index}
-              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100"
+              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-amber-100"
             >
               {/* Post Image/Icon */}
-              <div className="h-48 bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 flex items-center justify-center">
+              <div className="h-48 bg-gradient-to-br from-amber-300 via-orange-400 to-amber-600 flex items-center justify-center">
                 <span className="text-7xl">{post.image}</span>
               </div>
 
               {/* Post Content */}
               <div className="p-6">
                 <div className="flex items-center space-x-2 mb-3">
-                  <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">
+                  <span className="px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-xs font-semibold">
                     {post.category}
                   </span>
                 </div>
@@ -120,7 +117,7 @@ const BlogPage = () => {
                   {post.tags.slice(0, 2).map((tag, idx) => (
                     <span
                       key={idx}
-                      className="inline-flex items-center space-x-1 text-xs text-gray-500"
+                      className="inline-flex items-center space-x-1 text-xs text-amber-800/80"
                     >
                       <Tag className="h-3 w-3" />
                       <span>{tag}</span>
@@ -141,20 +138,18 @@ const BlogPage = () => {
                 </div>
 
                 {/* Read More Button */}
-                <button className="w-full flex items-center justify-center space-x-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:shadow-lg transition-all duration-300 text-sm font-medium">
-                  <span>Read More</span>
-                  <ArrowRight className="h-4 w-4" />
-                </button>
+                {post.link && (
+                  <Link
+                    to={post.link}
+                    className="w-full flex items-center justify-center space-x-2 px-4 py-2 bg-gradient-to-r from-amber-600 to-orange-500 text-white rounded-lg hover:shadow-lg transition-all duration-300 text-sm font-medium"
+                  >
+                    <span>Read More</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                )}
               </div>
             </article>
           ))}
-        </div>
-
-        {/* Coming Soon Notice */}
-        <div className="mt-16 text-center p-8 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl border border-purple-100">
-          <p className="text-gray-700 text-lg font-medium">
-            📝 More articles coming soon... Personal documentation...
-          </p>
         </div>
       </div>
     </div>
