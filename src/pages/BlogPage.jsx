@@ -14,6 +14,17 @@ const BlogPage = () => {
       image: '🎧',
       link: '/blog/ai-pm-podcast-summary',
     },
+    {
+      title: 'The Art of Founder-Led Sales: Building Trust Through Vulnerability and Value',
+      excerpt:
+        "Podcast summary and reflective essay on Jen Abel's framework for founder-led sales: avoiding unqualified prospects, selling services before software, and turning sales into a learning engine.",
+      date: 'November 23, 2025',
+      readTime: '8 min read',
+      category: 'Sales & Go-to-Market',
+      tags: ['Founder-Led Sales', 'B2B', 'Podcast'],
+      image: '📈',
+      link: '/blog/founder-led-sales',
+    },
   ];
 
   return (

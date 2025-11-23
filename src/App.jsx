@@ -6,6 +6,7 @@ import BlogPage from './pages/BlogPage';
 import ContactPage from './pages/ContactPage';
 import Footer from './components/Footer';
 import PodcastAIPMSummary from './pages/PodcastAIPMSummary';
+import PodcastFounderLedSales from './pages/PodcastFounderLedSales';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/ai-pm-podcast-summary" element={<PodcastAIPMSummary />} />
+          <Route path="/blog/founder-led-sales" element={<PodcastFounderLedSales />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
         <Footer />
